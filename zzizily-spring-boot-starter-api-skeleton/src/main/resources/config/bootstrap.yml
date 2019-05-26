@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: api-skeleton
+  profiles:
+    active: local
+
+---
+
+debug: true
+
+spring:
+  profiles: local
+  cloud:
+    config:
+      enabled: false
+      label: develop
+      uri: http://cloud-config-stage-service-pig.tricycle.co.kr:8888
+
+eureka:
+  client:
+    enabled: false
+    service-url:
+      defaultZone: http://${tricycle.account.eureka-username}:${tricycle.account.eureka-password}@cloud-eureka1-local-service-pig.tricycle.co.kr:8761/eureka/
+    # eureka registry 정보를 cache 로 받기 활성화
+    fetch-registry: true
+    # 설정된 시간(초)으로 eureka registry 정보 받기
+    registry-fetch-interval-seconds: 3
+    # instance 정보가 변경시 registory 정보 갱신 주기(초)
+    instance-info-replication-interval-seconds: 5
+    initial-instance-info-replication-interval-seconds: 10
+  instance:
+    prefer-ip-address: true
+    # 설정된 시간 주기로 eureka 에 client 살아 있는지 알려줌
+    lease-renewal-interval-in-seconds: 5
+    # 설정된 시간 동안 eureka 에 client 가 살아 있는지 신호를 보내지 않으면 eureka 에서 삭제
+    lease-expiration-duration-in-seconds: 10
+
+server:
+  port: 8080

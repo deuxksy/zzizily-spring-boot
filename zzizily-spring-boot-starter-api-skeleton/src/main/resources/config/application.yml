@@ -1,0 +1,11 @@
+spring:
+  mvc:
+    request-parameter-logging-filter:
+      enabled: true
+      level: warn
+
+logging:
+  path: ./log
+  level:
+    ROOT: info
+    com.zzizily: debug

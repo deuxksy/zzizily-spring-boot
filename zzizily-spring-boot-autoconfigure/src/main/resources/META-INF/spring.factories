@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.springframework.boot.context.ApplicationPidFileWriter,\
+org.springframework.boot.web.context.WebServerPortFileWriter,\
+com.zzizily.spring.boot.autoconfigure.config.RequestParameterLoggingFilterAutoConfiguration

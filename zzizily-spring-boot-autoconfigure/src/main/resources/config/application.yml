@@ -1,0 +1,23 @@
+spring:
+  mvc:
+    request-parameter-logging-filter:
+      enabled: true
+      level: info
+
+zzizily:
+  origins:
+    - http://www.zzizily.com
+  protocol: http
+  domain: zzizily.dev
+  host:
+    email: smtp.gmail.com
+    postgres: db-local.${zzizily.domain}
+  url:
+    cloud-eureka1: ${zzizily.protocol}://cloud-eureka1-local.${zzizily.domain}:8761
+    cloud-eureka2: ${zzizily.protocol}://cloud-eureka2-local.${zzizily.domain}:8761
+    cloud-config: ${zzizily.protocol}://cloud-config-local.${zzizily.domain}:8080
+    cloud-monitor: ${zzizily.protocol}://cloud-monitor-local.${zzizily.domain}:8080
+    cloud-oauth: ${zzizily.protocol}://cloud-oauth-local.${zzizily.domain}:8080
+    cloud-gateway: ${zzizily.protocol}://cloud-gateway-local.${zzizily.domain}:80
+    api-skeleton: ${zzizily.protocol}://api-skeleton-local.${zzizily.domain}:8080
+    client-skeleton: ${zzizily.protocol}://client-skeleton-local.${zzizily.domain}:8080

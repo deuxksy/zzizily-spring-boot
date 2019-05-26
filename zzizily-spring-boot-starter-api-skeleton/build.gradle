@@ -1,0 +1,51 @@
+buildscript {
+  ext {
+//    springBootVersion = "2.1.5.RELEASE"
+  }
+  repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://plugins.gradle.org/m2" }
+    maven { url "${repoGroupUrl}" }
+//    mavenLocal()
+  }
+  dependencies {
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootGradlePluginVersion}"
+    classpath "io.spring.gradle:dependency-management-plugin:${dependencyManagementPluginVersion}"
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: "maven"
+apply plugin: "idea"
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+
+group = "com.zzizily"
+version = "${version}"
+sourceCompatibility = compatibilityVersion
+targetCompatibility = compatibilityVersion
+[compileJava, compileTestJava]*.options*.encoding = "${encoding}"
+
+configurations {
+  compile.exclude module: "spring-boot-starter-tomcat"
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
+}
+
+repositories {
+  mavenCentral()
+  jcenter()
+  maven { url "${repoGroupUrl}" }
+//  mavenLocal()
+}
+
+jar {
+  enabled = true
+}
+
+dependencies {
+  implementation ('com.zzizily:zzizily-spring-boot-starter-api:0.0.1') { changing = true }
+}

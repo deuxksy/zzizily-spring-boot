@@ -1,0 +1,76 @@
+{
+  "properties": [
+    {
+      "name": "spring.mvc.request-parameter-logging-filter.enabled",
+      "type": "org.slf4j.event.Level",
+      "defaultValue": false,
+      "description": "true 또는 false"
+    },
+    {
+      "name": "spring.mvc.request-parameter-logging-filter.level",
+      "type": "java.lang.String",
+      "defaultValue": "warn",
+      "description": "로깅 레벨 설정"
+    },
+    {
+      "name": "zzizily.domain",
+      "type": "java.lang.String",
+      "defaultValue": "zzizily.dev",
+      "description": "서비스 도메인"
+    },
+    {
+      "name": "zzizily.protocol",
+      "type": "java.lang.String",
+      "defaultValue": "http",
+      "description": "http 또는 https"
+    },
+    {
+      "name": "zzizily.url.cloud-eureka1",
+      "type": "java.lang.String",
+      "defaultValue": "${zzizily.protocol}://cloud-eureka1-local.${zzizily.domain}:8761",
+      "description": "cloud-eureka1 서비스 url"
+    },
+    {
+      "name": "zzizily.url.cloud-eureka2",
+      "type": "java.lang.String",
+      "defaultValue": "${zzizily.protocol}://cloud-eureka2-local.${zzizily.domain}:8761",
+      "description": "cloud-eureka2 서비스 url"
+    },
+    {
+      "name": "zzizily.url.cloud-config",
+      "type": "java.lang.String",
+      "defaultValue": "${zzizily.protocol}://cloud-config-local.${zzizily.domain}:8080",
+      "description": "cloud-config 서비스 url"
+    },
+    {
+      "name": "zzizily.url.cloud-monitor",
+      "type": "java.lang.String",
+      "defaultValue": "${zzizily.protocol}://cloud-monitor-local.${zzizily.domain}:8080",
+      "description": "cloud-monitor 서비스 url"
+    },
+    {
+      "name": "zzizily.url.cloud-oauth",
+      "type": "java.lang.String",
+      "defaultValue": "${zzizily.protocol}://cloud-oauth-local.${zzizily.domain}:8080",
+      "description": "cloud-oauth 서비스 url"
+    },
+    {
+      "name": "zzizily.url.cloud-gateway",
+      "type": "java.lang.String",
+      "defaultValue": "${zzizily.protocol}://cloud-gateway-local.${zzizily.domain}:80",
+      "description": "cloud-gateway 서비스 url"
+    },
+    {
+      "name": "zzizily.url.api-skeleton",
+      "type": "java.lang.String",
+      "defaultValue": "${zzizily.protocol}://api-skeleton-local.${zzizily.domain}:8080",
+      "description": "api-skeleton 서비스 url"
+    },
+    {
+      "name": "zzizily.url.client-skeleton",
+      "type": "java.lang.String",
+      "defaultValue": "${zzizily.protocol}://client-skeleton-local.${zzizily.domain}:8080",
+      "description": "client-skeleton 서비스 url"
+    }
+  ]
+}

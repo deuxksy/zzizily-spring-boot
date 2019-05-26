@@ -1,0 +1,155 @@
+buildscript {
+  ext {
+//    springBootVersion = "2.1.5.RELEASE"
+  }
+  repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://plugins.gradle.org/m2" }
+    maven { url "${repoGroupUrl}" }
+    mavenLocal()
+  }
+  dependencies {
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootGradlePluginVersion}"
+    classpath "io.spring.gradle:dependency-management-plugin:${dependencyManagementPluginVersion}"
+  }
+}
+
+apply plugin: "java-library"
+apply plugin: "maven"
+apply plugin: "idea"
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+
+group = "com.zzizily"
+version = "${version}"
+sourceCompatibility = compatibilityVersion
+targetCompatibility = compatibilityVersion
+[compileJava, compileTestJava]*.options*.encoding = "${encoding}"
+
+configurations {
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
+}
+
+repositories {
+  mavenCentral()
+  jcenter()
+  maven { url "${repoGroupUrl}" }
+  mavenLocal()
+}
+
+jar {
+  enabled = true
+  manifest {
+    attributes(
+            "Implementation-Title": "${project.name}",
+            "Implementation-Version": "${project.version}"
+    )
+  }
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      repository(url: "${repoSnapshotUrl}") {
+        authentication(userName: "${repoUsername}", password: "${repoPassword}")
+      }
+      pom.groupId = project.group
+      pom.artifactId = project.name
+      pom.version = project.version
+    }
+  }
+}
+
+dependencyManagement {
+  imports {
+    mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    mavenBom "de.codecentric:spring-boot-admin-dependencies:${springBootAdminVersion}"
+  }
+}
+
+dependencies {
+  implementation ("com.zzizily:zzizily-spring-boot-autoconfigure:+") { changing = true }
+
+  /**
+   * Spring 시작
+   */
+  implementation "org.springframework.boot:spring-boot-starter-web"
+  implementation "org.springframework.boot:spring-boot-starter-undertow"
+  implementation "org.springframework.boot:spring-boot-starter-security"
+  implementation "org.springframework.boot:spring-boot-starter-hateoas"
+  implementation "org.springframework.boot:spring-boot-starter-actuator"
+  implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+  implementation "org.springframework.boot:spring-boot-starter-data-redis"
+  implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+  runtimeOnly    "org.springframework.boot:spring-boot-devtools"
+
+  implementation "org.springframework.cloud:spring-cloud-starter-config"
+  implementation "org.springframework.cloud:spring-cloud-config-client"
+  implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
+
+  implementation "org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure"
+
+
+  /**
+   * Spring 끝
+   */
+
+  // Logging
+  implementation "org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:${log4jdbcVersion}"
+  /**
+   * DB 시작
+   */
+  // HikariCP
+  implementation "com.zaxxer:HikariCP"
+  // postgresql jdbc driver
+  implementation "org.postgresql:postgresql:${postgresqlVersion}"
+  // querydsl
+  implementation "com.querydsl:querydsl-jpa"
+  // Migration
+  implementation "org.flywaydb:flyway-core"
+  /**
+   * DB 끝
+   */
+
+  // lucy xss
+  implementation "com.navercorp.lucy:lucy-xss:${lucyXssVersion}"
+  implementation "com.navercorp.lucy:lucy-xss-servlet:${lucyXssServletVersion}"
+
+  // static resources
+  implementation "org.webjars:webjars-locator:${webJarsLocatorVersion}"
+  // bootstrap 은 jquery 와 popup.js dependency 가 있음
+  implementation "org.webjars:bootstrap:${webjarsBootstrapVersion}"
+
+  // vo to dto
+  implementation "org.modelmapper:modelmapper:${modelMapperVersion}"
+
+  // web enable
+  compileOnly "javax.servlet:jstl"
+
+  // swagger
+  implementation "io.springfox:springfox-swagger2:${swaggerVersion}"
+  implementation "io.springfox:springfox-swagger-ui:${swaggerVersion}"
+  implementation "io.springfox:springfox-bean-validators:${swaggerVersion}"
+
+  // spring-boot-admin
+  implementation "de.codecentric:spring-boot-admin-starter-client"
+
+  // test junit 4 안씀 5 사용
+  testImplementation("org.springframework.boot:spring-boot-starter-test") {
+    exclude group: "junit", module: "junit"
+  }
+  testImplementation "org.springframework.security:spring-security-test"
+  testImplementation "org.springframework.restdocs:spring-restdocs-core"
+  testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc"
+  testImplementation "org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}"
+  testImplementation "org.junit.vintage:junit-vintage-engine:${junitJupiterVersion}"
+  testImplementation "org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}"
+  testImplementation "org.junit.platform:junit-platform-engine:${junitPlatformVersion}"
+  testImplementation "org.junit.platform:junit-platform-commons:${junitPlatformVersion}"
+
+  // test db
+  testRuntimeOnly "com.h2database:h2"
+}

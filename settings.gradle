@@ -1,0 +1,12 @@
+pluginManagement {
+  repositories {
+    gradlePluginPortal()
+  }
+}
+rootProject.name = 'zzizily-spring-boot'
+
+include 'zzizily-spring-boot-autoconfigure'
+include 'zzizily-spring-boot-starter-api'
+//include 'zzizily-spring-boot-starter-client'
+include 'zzizily-spring-boot-starter-api-skeleton'
+//include 'zzizily-spring-boot-starter-client-skeleton'
