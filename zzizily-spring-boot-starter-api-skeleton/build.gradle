@@ -1,7 +1,5 @@
 buildscript {
-  ext {
-//    springBootVersion = "2.1.5.RELEASE"
-  }
+  ext {}
   repositories {
     mavenCentral()
     jcenter()
@@ -47,5 +45,5 @@ jar {
 }
 
 dependencies {
-  implementation "org.springframework.boot:spring-boot-starter-web"
+  implementation ("com.zzizily:zzizily-spring-boot-starter-api:${version}") { changing = true }
 }
