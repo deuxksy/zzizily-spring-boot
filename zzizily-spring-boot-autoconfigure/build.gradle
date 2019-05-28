@@ -6,7 +6,7 @@ buildscript {
     mavenCentral()
     jcenter()
     maven { url "https://plugins.gradle.org/m2" }
-//    maven { url "${repoGroupUrl}" }
+    maven { url "${repoGroupUrl}" }
     mavenLocal()
   }
   dependencies {
@@ -36,8 +36,8 @@ configurations {
 repositories {
   mavenCentral()
   jcenter()
-//  maven { url "${repoGroupUrl}" }
-  mavenLocal()
+  maven { url "${repoGroupUrl}" }
+//  mavenLocal()
 }
 
 jar {

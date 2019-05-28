@@ -47,5 +47,5 @@ jar {
 }
 
 dependencies {
-  implementation ('com.zzizily:zzizily-spring-boot-starter-api:0.0.1') { changing = true }
+  implementation "org.springframework.boot:spring-boot-starter-web"
 }

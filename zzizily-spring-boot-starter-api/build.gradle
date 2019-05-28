@@ -7,7 +7,7 @@ buildscript {
     jcenter()
     maven { url "https://plugins.gradle.org/m2" }
     maven { url "${repoGroupUrl}" }
-    mavenLocal()
+//    mavenLocal()
   }
   dependencies {
     classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootGradlePluginVersion}"
@@ -37,7 +37,7 @@ repositories {
   mavenCentral()
   jcenter()
   maven { url "${repoGroupUrl}" }
-  mavenLocal()
+//  mavenLocal()
 }
 
 jar {
